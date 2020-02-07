@@ -176,18 +176,22 @@ def handle_command(command, user, rest_file):
                     response += 'and '+to_del[-1]+' were'
                 response += " not in your list."
 
-    # give a restaurant address
+    # give directions to a restaurant
     elif command.startswith('where is'):
         destination = command.split('where is ')[-1]
         destination = destination.strip().replace(' ','+')
-        if destination[-1]=='?':#not really needed, link seems to still work
-              destination = destination[:-2]
-        #see https://developers.google.com/maps/documentation/urls/guide
+        if destination[-1]=='?': # not really needed, link seems to still work
+              destination = destination[:-1]
+
+        # see https://developers.google.com/maps/documentation/urls/guide
         #maps_url = f'https://www.google.com/maps/dir/Materials+Science+and+Engineering+Building,+1304+W+Green+St,+Urbana,+IL+61801/{destination}'
-        #starts from MSEB, always.
-        #maps_url = f'https://www.google.com/maps/dir/?api=1&origin=Materials+Science+and+Engineering+Building,+1304+W+Green+St,+Urbana,+IL+61801&destination={destination}&travelmode=walking'
-        maps_url = f'https://www.google.com/maps/dir/?api=1&destination={destination}&travelmode=walking'                                          
+        # starts from MSEB, always.
+        maps_url = f'https://www.google.com/maps/dir/?api=1&origin=Materials+Science+and+Engineering+Building,+1304+W+Green+St,+Urbana,+IL+61801&destination={destination}&travelmode=walking'
+
+        # starts from current location; not always accurate
+        #maps_url = f'https://www.google.com/maps/dir/?api=1&destination={destination}&travelmode=walking'                                          
         response = 'Try these directions to find it: \n'+maps_url
+
     # choose a random restaurant
     elif command.count('where')>=1:
         response = "Here is a random restaurant selection: "
