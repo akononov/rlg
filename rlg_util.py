@@ -222,9 +222,9 @@ def handle_reaction(reaction, user, rest_file):
     response=None
     
     if reaction=='-1': #make elif when josh filter applied
-        options = ["VETOED BECAUSE WE LIVE IN THE LAND OF THE FREE! :fireworks::flag-us::fireworks: How about trying something else:"\
-                   ,"That option doesn't seem to be too popular, how about this:",\
-                   "My baby doesn't want to eat there. Does baby want to go to:"]
+        options = ["VETOED BECAUSE WE LIVE IN THE LAND OF THE FREE! :fireworks::flag-us::fireworks: How about trying something else: ",\
+                   "That option doesn't seem to be too popular, how about this: ",\
+                   "My baby doesn't want to eat there. Does baby want to go to: "]
         response = random.choice(options)
         rest_dict, rest_list = load_restaurants(rest_file)
         rest = random.choice(rest_list)
