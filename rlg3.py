@@ -19,19 +19,20 @@ def respond(**payload):
   web_client = payload['web_client']
 
   # check for direct message
-  user_id, message = parse_direct_mention(data['text'])
-  if user_id == rlgbot_id:
-    channel_id = data['channel']
-#   thread_ts = data['ts']
-    user = data['user']
+  if 'text' in data:
+    user_id, message = parse_direct_mention(data['text'])
+    if user_id == rlgbot_id:
+      channel_id = data['channel']
+#     thread_ts = data['ts']
+      user = data['user']
 
-    response=handle_command(message, user, rest_file)
+      response=handle_command(message, user, rest_file)
 
-    web_client.chat_postMessage(
-      channel=channel_id,
-      text=response #,
-#     thread_ts=thread_ts
-    )
+      web_client.chat_postMessage(
+        channel=channel_id,
+        text=response #,
+#       thread_ts=thread_ts
+      )
 
   # if bot's suggestion, save data
   if 'username' in data:
