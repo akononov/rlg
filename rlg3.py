@@ -21,6 +21,12 @@ def respond(**payload):
   # check for direct message
   if 'text' in data:
     user_id, message = parse_direct_mention(data['text'])
+
+    # special case: bitmoji "what's for lunch?"
+    if "/bitmoji" in data['text'] and "for lunch" in data['text']:
+      user_id = rlgbot_id
+      message = "where"
+
     if user_id == rlgbot_id:
       channel_id = data['channel']
 #     thread_ts = data['ts']
